@@ -2,46 +2,93 @@ package scanner
 
 import (
 	"bufio"
+	"github.com/panjf2000/ants/v2"
 	"log"
 	"os"
 	"regexp"
+	"sync"
 )
+
+var TempLiveIP []string
+var Mu sync.Mutex
+
+func insertToLiveIP(liveIps []string) {
+	Mu.Lock()
+	TempLiveIP = append(TempLiveIP, liveIps...)
+	Mu.Unlock()
+}
+
+func workFunc(i interface{}) {
+	ipSubnet, ok := i.(string)
+	if !ok {
+		log.Printf("scanner/workFunc: can not convert type(%T) to type(string)\n", i)
+		return
+	}
+	log.Printf("scanner/workFunc: begin scanning %s\n", ipSubnet)
+	args := []string{"-sn", ipSubnet}
+	output := Run(args)
+	liveIps := findIPv4Addresses(string(output))
+	insertToLiveIP(liveIps)
+	log.Printf("scanner/workFunc: finish scanning %s\n", ipSubnet)
+}
 
 // 此函数根据Scanner得IpFileName获取ip段，然后探测存活ip保存到LiveIP中
 func (sc *Scanner) scanLiveIP() {
 	ipListAll := parseIpFromFile(sc.IpFileName)
 
-	workNumbers := len(ipListAll)
-	jobs := make(chan string, workNumbers)
-	results := make(chan []string, workNumbers)
-
-	for i := 0; i < 8; i++ {
-		go work(i, jobs, results)
+	var wg sync.WaitGroup
+	p, err := ants.NewPoolWithFunc(10, func(i interface{}) {
+		workFunc(i)
+		wg.Done()
+	})
+	if err != nil {
+		log.Printf("scanner/scanLiveIP: %v\n", err)
 	}
+	defer p.Release()
 
-	for _, ip := range ipListAll {
-		jobs <- ip
+	for _, ipSubnet := range ipListAll {
+		wg.Add(1)
+		_ = p.Invoke(ipSubnet)
 	}
-	close(jobs)
+	wg.Wait()
 
-	var liveIPs []string
-	for i := 0; i < workNumbers; i++ {
-		liveIP := <-results
-		liveIPs = append(liveIPs, liveIP...)
-	}
-
-	sc.LiveIP = liveIPs
+	sc.LiveIP = TempLiveIP
 }
 
-func work(id int, jobs <-chan string, result chan<- []string) {
-	for ipSubnet := range jobs {
-		log.Printf("scanner/work: worker %d is working\n", id)
-		args := []string{"-sn", ipSubnet}
-		output := Run(args)
-		LiveIp := findIPv4Addresses(string(output))
-		result <- LiveIp
-	}
-}
+//func (sc *Scanner) scanLiveIP() {
+//	ipListAll := parseIpFromFile(sc.IpFileName)
+//
+//	workNumbers := len(ipListAll)
+//	jobs := make(chan string, workNumbers)
+//	results := make(chan []string, workNumbers)
+//
+//	for i := 0; i < 8; i++ {
+//		go work(i, jobs, results)
+//	}
+//
+//	for _, ip := range ipListAll {
+//		jobs <- ip
+//	}
+//	close(jobs)
+//
+//	var liveIPs []string
+//	for i := 0; i < workNumbers; i++ {
+//		liveIP := <-results
+//		liveIPs = append(liveIPs, liveIP...)
+//	}
+//
+//	sc.LiveIP = liveIPs
+//}
+
+//func work(id int, jobs <-chan string, result chan<- []string) {
+//	for ipSubnet := range jobs {
+//		log.Printf("scanner/work: worker %d is working\n", id)
+//		args := []string{"-sn", ipSubnet}
+//		output := Run(args)
+//		LiveIp := findIPv4Addresses(string(output))
+//		result <- LiveIp
+//	}
+//}
 
 // 处理nmap -sn ip的输出，找到存活的ip
 func findIPv4Addresses(s string) []string {
