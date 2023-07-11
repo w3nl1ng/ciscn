@@ -210,3 +210,9 @@ Nmap done: 256 IP addresses (97 hosts up) scanned in 11.96 seconds`
 	LiveIp := findIPv4Addresses(output)
 	fmt.Println(LiveIp)
 }
+
+func Test_scanLiveIP(t *testing.T) {
+	sc := NewScanner("iplist-test.txt")
+	sc.scanLiveIP()
+	fmt.Println(sc.LiveIP)
+}
