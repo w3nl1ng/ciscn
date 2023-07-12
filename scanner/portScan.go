@@ -2,8 +2,8 @@ package scanner
 
 import (
 	"ciscn/config"
-	"fmt"
 	"log"
+	"runtime"
 	"strconv"
 	"strings"
 	"sync"
@@ -58,7 +58,7 @@ func scanPort(i interface{}) {
 	ip := arg.ip
 
 	log.Printf("scanner/scanPort: begin scanning %s", ip)
-	args := []string{"-p", port, ip}
+	args := []string{"-sS", "-p", port, ip}
 	output := Run(args)
 	// fmt.Println(string(output))
 	openPorts, protocols := findOpenPort(string(output))
@@ -68,9 +68,6 @@ func scanPort(i interface{}) {
 		insertToPort(openPorts)
 		insertToProtocol(protocols)
 
-		// fmt.Println(openPorts)
-		// fmt.Println(protocols)
-		// fmt.Println("here")
 		var liveIpInfo LiveIPInfo
 
 		for i := 0; i < len(TempOpenPorts); i++ {
@@ -82,8 +79,6 @@ func scanPort(i interface{}) {
 
 		InsertToTempResult(ip, liveIpInfo)
 
-		// fmt.Println(TempOpenPorts)
-		// fmt.Println(TempProtocols)
 		clearPortsAndProtocol()
 	}
 	log.Printf("scanner/scanPort: finish scanning %s", ip)
@@ -122,68 +117,10 @@ func (sc *Scanner) PortScan() {
 		arg.port = Ports
 		arg.ip = liveIp
 		_ = p.Invoke(arg)
-
-		// for i := 0; i < len(TempOpenPorts); i++{
-		// 	var portInfo PortInfo
-		// 	portInfo.Port, _ = strconv.Atoi(TempOpenPorts[i])
-		// 	portInfo.Protocol = TempProtocols[i]
-		// 	var liveIpInfo LiveIPInfo
-		// 	liveIpInfo.Services = append(liveIpInfo.Services, portInfo)
-		// 	sc.ScanResult = make(map[string]LiveIPInfo)
-		// 	sc.ScanResult[liveIp] = liveIpInfo
-		// }
-
-		// // fmt.Println(TempOpenPorts)
-		// // fmt.Println(TempProtocols)
-
-		// TempOpenPorts = []string{}
-		// TempProtocols = []string{}
-
 	}
 	wg.Wait()
-	// fmt.Println(TempResult)
 
 	sc.ScanResult = TempResult
-
-	//ip = "baidu.com"
-	//cmd := exec.Command("nmap", "-p", Ports, ip)
-	//out, err := cmd.CombinedOutput()
-	//if err != nil {
-	//	log.Fatal("cmd.Run() failed with %s\n", err)
-	//	// fmt.Println(string(out))
-	//}
-	//// fmt.Println(string(out))
-
-	////确定存活列表标志
-	//Flag := "PORT    STATE SERVICE"
-	//Flag1 := "open"
-	//Flag2 := "filtered"
-	//
-	//var lines []string
-	//var portLive []string
-	//var protocol []string
-	//var lineNum int
-	//
-	//lines = strings.Split(string(out), "\n")
-	//
-	//for i, v := range lines {
-	//	if strings.Contains(v, Flag) {
-	//		lineNum = i
-	//	}
-	//}
-	//
-	//for i := lineNum + 1; i < len(lines); i++ {
-	//	v := lines[i]
-	//	if (strings.Contains(v, Flag1)) || (strings.Contains(v, Flag2)) {
-	//		liveStr1 := strings.Split(v, " ")
-	//		liveStr2 := strings.Split(liveStr1[0], "/")
-	//		portLive = append(portLive, liveStr2[0])
-	//		protocol = append(protocol, liveStr2[1])
-	//	}
-	//}
-	//// fmt.Println(lines)
-	//fmt.Println(portLive)
-	//fmt.Println(protocol)
 
 }
 
@@ -198,40 +135,36 @@ func findOpenPort(out string) ([]string, []string) {
 	var protocol []string
 	var lineNum int
 
-	lines = strings.Split(string(out), "\n")
+	//windows与linux的换行符不一致，需要区别对待
+	var sep string
+	if runtime.GOOS == "windows" {
+		sep = "\r\n"
+	} else {
+		sep = "\n"
+	}
+
+	lines = strings.Split(string(out), sep)
 
 	for i, v := range lines {
 		if strings.Contains(v, Flag) {
 			lineNum = i
 			break
 		}
-		// print(strings.Contains(lines[4],Flag))
-		// fmt.Print("i, v:")
-		// fmt.Println(i)
-		// fmt.Println(v)
 	}
 
-	// fmt.Print("linenum:")
-	// fmt.Println(lineNum)
 	for i := lineNum + 1; i < len(lines) && lineNum != 0; i++ {
 		v := lines[i]
-		// fmt.Println(v)
 		if (strings.Contains(v, Flag1)) || (strings.Contains(v, Flag2)) {
 			liveStr1 := strings.Split(v, " ")
 			liveStr2 := strings.Split(liveStr1[0], "/")
 			portLive = append(portLive, liveStr2[0])
-			if strings.Compare(liveStr1[len(liveStr1)-1], "http-proxy") == 0{
+			if strings.Compare(liveStr1[len(liveStr1)-1], "http-proxy") == 0 {
 				protocol = append(protocol, "http")
 			} else {
 				protocol = append(protocol, liveStr1[len(liveStr1)-1])
 			}
 		}
 	}
-	fmt.Print("")
-	// fmt.Println(lines)
-	// fmt.Println(portLive)
-	// fmt.Println(protocol)
-
 
 	return portLive, protocol
 }
