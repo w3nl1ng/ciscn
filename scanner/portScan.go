@@ -2,6 +2,7 @@ package scanner
 
 import (
 	"ciscn/config"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -219,12 +220,18 @@ func findOpenPort(out string) ([]string, []string) {
 			liveStr1 := strings.Split(v, " ")
 			liveStr2 := strings.Split(liveStr1[0], "/")
 			portLive = append(portLive, liveStr2[0])
-			protocol = append(protocol, liveStr2[1])
+			if strings.Compare(liveStr1[len(liveStr1)-1], "http-proxy") == 0{
+				protocol = append(protocol, "http")
+			} else {
+				protocol = append(protocol, liveStr1[len(liveStr1)-1])
+			}
 		}
 	}
+	fmt.Print("")
 	// fmt.Println(lines)
 	// fmt.Println(portLive)
 	// fmt.Println(protocol)
+
 
 	return portLive, protocol
 }
