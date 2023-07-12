@@ -2,7 +2,6 @@ package scanner
 
 import (
 	"ciscn/config"
-	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -13,6 +12,8 @@ import (
 
 var Mu1 sync.Mutex
 var Mu2 sync.Mutex
+var Mu3 sync.Mutex
+var Mu4 sync.Mutex
 
 var TempOpenPorts []string
 var TempProtocols []string
@@ -21,7 +22,7 @@ var TempResult map[string]LiveIPInfo
 func insertToPort(ports []string) {
 	Mu1.Lock()
 	TempOpenPorts = append(TempOpenPorts, ports...)
-	Mu1.Unlock() 
+	Mu1.Unlock()
 }
 
 func insertToProtocol(protocol []string) {
@@ -30,8 +31,24 @@ func insertToProtocol(protocol []string) {
 	Mu2.Unlock()
 }
 
+func InsertToTempResult(ip string, lp LiveIPInfo) {
+	Mu3.Lock()
+	TempResult[ip] = lp
+	Mu3.Unlock()
+}
+
+func clearPortsAndProtocol() {
+	Mu4.Lock()
+	TempOpenPorts = []string{}
+	TempProtocols = []string{}
+	Mu4.Unlock()
+}
+
 func scanPort(i interface{}) {
-	arg, ok := i.(struct{port string; ip string})
+	arg, ok := i.(struct {
+		port string
+		ip   string
+	})
 	if !ok {
 		log.Printf("scanner/scanPort: can not convert type(%T) to type(string)\n", i)
 		return
@@ -39,13 +56,13 @@ func scanPort(i interface{}) {
 	port := arg.port
 	ip := arg.ip
 
-	log.Printf("scanner/scanPort: begin scanning")
+	log.Printf("scanner/scanPort: begin scanning %s", ip)
 	args := []string{"-p", port, ip}
 	output := Run(args)
 	// fmt.Println(string(output))
 	openPorts, protocols := findOpenPort(string(output))
 	if openPorts == nil || protocols == nil {
-		log.Printf("none")
+		log.Printf("scanner/scanPort: not found open in %s", ip)
 	} else {
 		insertToPort(openPorts)
 		insertToProtocol(protocols)
@@ -55,20 +72,20 @@ func scanPort(i interface{}) {
 		// fmt.Println("here")
 		var liveIpInfo LiveIPInfo
 
-		for i := 0; i < len(TempOpenPorts); i++{
+		for i := 0; i < len(TempOpenPorts); i++ {
 			var portInfo PortInfo
 			portInfo.Port, _ = strconv.Atoi(TempOpenPorts[i])
 			portInfo.Protocol = TempProtocols[i]
 			liveIpInfo.Services = append(liveIpInfo.Services, portInfo)
 		}
 
-		TempResult[ip] = liveIpInfo
+		InsertToTempResult(ip, liveIpInfo)
 
 		// fmt.Println(TempOpenPorts)
 		// fmt.Println(TempProtocols)
-		TempOpenPorts = []string{}
-		TempProtocols = []string{}
+		clearPortsAndProtocol()
 	}
+	log.Printf("scanner/scanPort: finish scanning %s", ip)
 }
 
 // 此函数扫描LiveIP中的IP，找出存活的端口和对应的协议
@@ -85,8 +102,6 @@ func (sc *Scanner) portScan() {
 	}
 	Ports = strings.TrimSuffix(Ports, ",")
 
-	fmt.Println("")
-
 	p, err := ants.NewPoolWithFunc(10, func(i interface{}) {
 		scanPort(i)
 		wg.Done()
@@ -99,7 +114,10 @@ func (sc *Scanner) portScan() {
 
 	for _, liveIp := range sc.LiveIP {
 		wg.Add(1)
-		var arg struct{port string; ip string}
+		var arg struct {
+			port string
+			ip   string
+		}
 		arg.port = Ports
 		arg.ip = liveIp
 		_ = p.Invoke(arg)
@@ -125,7 +143,6 @@ func (sc *Scanner) portScan() {
 	// fmt.Println(TempResult)
 
 	sc.ScanResult = TempResult
-
 
 	//ip = "baidu.com"
 	//cmd := exec.Command("nmap", "-p", Ports, ip)
@@ -167,7 +184,6 @@ func (sc *Scanner) portScan() {
 	//fmt.Println(portLive)
 	//fmt.Println(protocol)
 
-
 }
 
 func findOpenPort(out string) ([]string, []string) {
@@ -184,7 +200,7 @@ func findOpenPort(out string) ([]string, []string) {
 	lines = strings.Split(string(out), "\n")
 
 	for i, v := range lines {
-		if (strings.Contains(v, Flag)) {
+		if strings.Contains(v, Flag) {
 			lineNum = i
 			break
 		}
@@ -206,9 +222,9 @@ func findOpenPort(out string) ([]string, []string) {
 			protocol = append(protocol, liveStr2[1])
 		}
 	}
-		// fmt.Println(lines)
+	// fmt.Println(lines)
 	// fmt.Println(portLive)
 	// fmt.Println(protocol)
 
-	return portLive, protocol; 
+	return portLive, protocol
 }
