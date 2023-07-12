@@ -5,7 +5,6 @@ import (
 	"testing"
 )
 
-
 func Test_findOpenPort(t *testing.T) {
 	output := `Starting Nmap 7.80 ( https://nmap.org ) at 2023-07-11 20:41 CST
 Nmap scan report for baidu.com (39.156.66.10)
@@ -24,11 +23,11 @@ Nmap done: 1 IP address (1 host up) scanned in 2.32 seconds`
 }
 
 func Test_portScan(t *testing.T) {
-	sc := NewScanner("iplist-test.txt")
-	sc.scanLiveIP()
+	sc := NewScanner("../iplist.txt")
+	sc.ScanLiveIP()
 	// sc.LiveIP = []string{"16.163.13.255", "16.163.13.251", "16.163.13.250", "16.163.13.249"}
 	// sc.LiveIP = []string{"16.163.13.255"}
-	sc.portScan()
+	sc.PortScan()
 	fmt.Println(sc.ScanResult)
 }
 

@@ -89,7 +89,7 @@ func scanPort(i interface{}) {
 }
 
 // 此函数扫描LiveIP中的IP，找出存活的端口和对应的协议
-func (sc *Scanner) portScan() {
+func (sc *Scanner) PortScan() {
 	var Ports string
 	var wg sync.WaitGroup
 	//var args []string

@@ -33,7 +33,7 @@ func workFunc(i interface{}) {
 }
 
 // 此函数根据Scanner得IpFileName获取ip段，然后探测存活ip保存到LiveIP中
-func (sc *Scanner) scanLiveIP() {
+func (sc *Scanner) ScanLiveIP() {
 	ipListAll := parseIpFromFile(sc.IpFileName)
 
 	var wg sync.WaitGroup
