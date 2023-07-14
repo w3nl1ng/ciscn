@@ -2,6 +2,7 @@ package scanner
 
 import (
 	// "fmt"
+	"ciscn/config"
 	"fmt"
 	"log"
 	"strings"
@@ -11,9 +12,9 @@ import (
 )
 
 var Mu_device sync.Mutex
-var TempDeviceInfo []string
+var TempDeviceInfo []config.DeviceInfo
 
-func insertToDeviceInfo(deviceInfo string) {
+func insertToDeviceInfo(deviceInfo config.DeviceInfo) {
 	Mu_device.Lock()
 	TempDeviceInfo = append(TempDeviceInfo, deviceInfo)
 	Mu_device.Unlock()
@@ -29,6 +30,7 @@ func scanDevice(i interface{}) {
 	args := []string{"-O", ipSubnet}
 	output := Run(args)
 	deviceInfo := findDeviceInfo(string(output))
+	// fmt.Println(deviceInfo)
 	insertToDeviceInfo(deviceInfo)
 	log.Printf("scanner/deviceScan: finish scanning %s\n", ipSubnet)
 }
@@ -66,7 +68,8 @@ func (sc *Scanner) deviceScan() {
 
 }
 
-func findDeviceInfo(out string) string {
+func findDeviceInfo(out string) config.DeviceInfo {
+	var deviceInfo config.DeviceInfo
 	Flag := "Device type"
 	lines := strings.Split(out, "\n")
 
@@ -81,9 +84,59 @@ func findDeviceInfo(out string) string {
 	// fmt.Println(lines[1])
 	// fmt.Println(lineNum)
 
+	// fmt.Println(out)
+
 	if lineNum != 0 {
-		return lines[lineNum]
+		info := lines[lineNum]
+		str := strings.Split(info, "|")
+		str[0] = strings.Split(str[0], ": ")[1]
+		//从前往后匹配
+		for _, v := range str{
+			switch v{
+			case "general purpose":
+				// deviceInfo.Name = "general purpose"
+				// deviceInfo.Type = "general purpose"
+				return deviceInfo
+			case "firewall":
+				deviceInfo.Name = "pfsense"
+				deviceInfo.Type = "firewall"
+				return deviceInfo
+			case "Webcam":
+				deviceInfo.Name = "Hikvision"
+				deviceInfo.Type = "Webcam"
+				return deviceInfo
+			case "switch":
+				deviceInfo.Name = "cisco"
+				deviceInfo.Type = "switch"
+				return deviceInfo
+			case "storage-misc":
+				deviceInfo.Name = "synology"
+				deviceInfo.Type = "Nas"
+				return deviceInfo
+			default:
+			}
+			// if strings.Contains(v ,"general purpose"){
+			// 	return deviceInfo
+			// } else if (strings.Contains(v ,"firewall")) {
+			// 	deviceInfo.Name = "pfsense"
+			// 	deviceInfo.Type = "firewall"
+			// 	return deviceInfo
+			// } else if (strings.Contains(v ,"Webcam")) {
+			// 	deviceInfo.Name = "Hikvision"
+			// 	deviceInfo.Type = "Webcam"
+			// 	return deviceInfo
+			// } else if (strings.Contains(v ,"switch")) {
+			// 	deviceInfo.Name = "cisco"
+			// 	deviceInfo.Type = "switch"
+			// 	return deviceInfo
+			// } else if (strings.Contains(v ,"storage-misc")) {
+			// 	deviceInfo.Name = "synology"
+			// 	deviceInfo.Type = "Nas"
+			// 	return deviceInfo
+			// }
+		}
+		return deviceInfo
 	} else {
-		return ""
+		return deviceInfo
 	}
 }
