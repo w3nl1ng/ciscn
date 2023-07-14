@@ -12,9 +12,9 @@ import (
 )
 
 var Mu_device sync.Mutex
-var TempDeviceInfo []config.DeviceInfo
+var TempDeviceInfo []string
 
-func insertToDeviceInfo(deviceInfo config.DeviceInfo) {
+func insertToDeviceInfo(deviceInfo string) {
 	Mu_device.Lock()
 	TempDeviceInfo = append(TempDeviceInfo, deviceInfo)
 	Mu_device.Unlock()
@@ -68,10 +68,11 @@ func (sc *Scanner) deviceScan() {
 
 }
 
-func findDeviceInfo(out string) config.DeviceInfo {
+func findDeviceInfo(out string) string {
 	var deviceInfo config.DeviceInfo
 	Flag := "Device type"
 	lines := strings.Split(out, "\n")
+	InFostr := "" 
 
 	var lineNum int
 	for i, v := range lines {
@@ -96,24 +97,28 @@ func findDeviceInfo(out string) config.DeviceInfo {
 			case "general purpose":
 				// deviceInfo.Name = "general purpose"
 				// deviceInfo.Type = "general purpose"
-				return deviceInfo
+				InFostr = deviceInfo.Type + deviceInfo.Name
+				return InFostr
 			case "firewall":
 				deviceInfo.Name = "pfsense"
 				deviceInfo.Type = "firewall"
-				return deviceInfo
+				InFostr = deviceInfo.Type + deviceInfo.Name
+				return InFostr
 			case "Webcam":
 				deviceInfo.Name = "Hikvision"
 				deviceInfo.Type = "Webcam"
-				return deviceInfo
+				InFostr = deviceInfo.Type + deviceInfo.Name
+				return InFostr
 			case "switch":
 				deviceInfo.Name = "cisco"
 				deviceInfo.Type = "switch"
-				return deviceInfo
+				InFostr = deviceInfo.Type + deviceInfo.Name
+				return InFostr
 			case "storage-misc":
 				deviceInfo.Name = "synology"
 				deviceInfo.Type = "Nas"
-				return deviceInfo
-			default:
+				InFostr = deviceInfo.Type + deviceInfo.Name
+				return InFostr
 			}
 			// if strings.Contains(v ,"general purpose"){
 			// 	return deviceInfo
@@ -135,8 +140,8 @@ func findDeviceInfo(out string) config.DeviceInfo {
 			// 	return deviceInfo
 			// }
 		}
-		return deviceInfo
+		return InFostr
 	} else {
-		return deviceInfo
+		return InFostr
 	}
 }
