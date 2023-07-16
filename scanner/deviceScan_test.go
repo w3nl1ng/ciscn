@@ -27,9 +27,10 @@ Nmap done: 1 IP address (1 host up) scanned in 25.09 seconds`
 
 func Test_deviceScan(t *testing.T) {
 	sc := NewScanner("iplist-test.txt")
-	// sc.scanLiveIP()
+	// sc.ScanLiveIP()
 	sc.LiveIP = []string{"16.163.13.255", "16.163.13.251", "16.163.13.250", "16.163.13.249"}
 	sc.PortScan()
 	sc.deviceScan()
-	fmt.Println(sc.ScanResult["16.163.13.255"].DeviceInfo)
+
+	fmt.Println(sc.ScanResult)
 }
