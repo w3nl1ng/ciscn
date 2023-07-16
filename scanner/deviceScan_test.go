@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"testing"
 )
-func Test_findDeviceInfo(t *testing.T){
-out := `Starting Nmap 7.80 ( https://nmap.org ) at 2023-07-12 13:31 CST
+
+func Test_findDeviceInfo(t *testing.T) {
+	out := `Starting Nmap 7.80 ( https://nmap.org ) at 2023-07-12 13:31 CST
 Nmap scan report for ec2-16-163-13-0.ap-east-1.compute.amazonaws.com (16.163.13.0)
 Host is up (0.081s latency).
 Not shown: 997 filtered ports
