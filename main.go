@@ -24,8 +24,6 @@ func main() {
 	sc.ServiceScan()
 	sc.DeviceScan()
 
-	fmt.Println(sc.ScanResult)
-
 	cost := time.Since(start)
 	fmt.Printf("cost: %v", cost)
 
