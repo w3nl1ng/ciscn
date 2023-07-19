@@ -1,0 +1,27 @@
+package config
+
+var RuleData1 = []RuleLab{
+	{1, "Nginx", "header|body", "or", InStr{"(Welcome to nginx)", "(Server: nginx)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "OpenSSL", "header", "", InStr{"", "(openssl)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{3, "WordPress", "body|header", "or", InStr{"(name=\"generator\" content=\"wordpress |/wp-includes/)", "(x-pingback|wordpress_test_cookie)", "(e1e8bdc3ce87340ab6ebe467519cf245|b231ad66a2a9b0eb06f72c4c88973039|D5FE5CBCC31CFF5F8AC010DB72EB000C|28a122aa74f6929b0994fc544555c0b1|3ead5afa19537170bb980924397b70d6|e44d22b74f7ee4435e22062d5adf4a6a|6cec5a9c106d45e458fc680f70df91b0|fa54dbf2f61bd2e0188e47f5f578f736)"}, ReqHttp{"", "", nil, ""}},
+	{1, "LiteSpeed", "header", "", InStr{"", "(server: litespeed)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "Jetty", "header|ico", "or", InStr{"", "(Server: Jetty)(?:\\/([\\d.]+))?", "(ed7d5c39c69262f4ba95418d4f909b10)"}, ReqHttp{"", "", nil, ""}},
+	{1, "JAVA", "body|header", "or", InStr{"(<h2>struts problem report</h2>|there is no action mapped for namespace|no result defined for action and result input|index.jsp)", "(set-cookie: jsessionid)", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "Node.js", "header", "", InStr{"", "(x-powered-by: express)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "express", "header", "", InStr{"", "(x-powered-by: express)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "asp.net", "header", "", InStr{"", "(X-AspNet-Version:)", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "asp.net", "header", "", InStr{"", "(Server: Microsoft ASP.NET)", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "PHP", "header", "", InStr{"", "(x-powered-by:\\s*php)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "Microsoft-HTTPAPI", "header", "", InStr{"", "(Server: Microsoft-HTTPAPI/([\\d.]+))", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "Apache", "header", "", InStr{"", "(Server: Apache)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "micro_httpd", "header", "", InStr{"", "(Server: micro_httpd)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "IIS", "header|body", "or", InStr{"(<img src=\"welcome.png\" alt=\"IIS)", "(Server: Microsoft-IIS)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "OpenResty", "body|header", "or", InStr{"(Thank you for flying OpenResty)", "(Server: openresty)(?:\\/([\\d.]+))?", "(88717398db158e3330ce94fc1784e4a7)"}, ReqHttp{"", "", nil, ""}},
+	{1, "OpenResty", "body", "", InStr{"(<center>openresty/)", "", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "OpenResty", "header", "", InStr{"", "(ngx_openresty)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "Grafana", "body", "", InStr{"(background-image: url(\"public/img/grafana_icon.svg\")|Sometimes restarting grafana-server can help)", "", ""}, ReqHttp{"", "", nil, ""}},
+	{1, "Grafana", "body", "", InStr{"(window.grafanabootdata = )", "", ""}, ReqHttp{"", "", nil, ""}},
+	{3, "Weblogic", "body", "", InStr{"Error 404--Not Found", "", ""}, ReqHttp{"", "", nil, ""}},
+	{3, "Elasticsearch", "body|header", "or", InStr{"(you know, for search|<title>elasticsearch)", "(server: ecstatic)(?:\\/([\\d.]+))?", ""}, ReqHttp{"", "", nil, ""}},
+	{3, "RabbitMQ", "body", "", InStr{"(<title>RabbitMQ)", "", ""}, ReqHttp{"", "", nil, ""}},
+}

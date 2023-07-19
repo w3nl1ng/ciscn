@@ -1,0 +1,1220 @@
+[
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nCONNECTION: close\\r\\n(?:Date: .*\\r\\nLast-Modified: .*\\r\\nEtag: \"\\d+:[\\da-f]+\"\\r\\n)?CONTENT-LENGTH: \\d+\\r\\n(?:P3P: CP=CAO PSA OUR\\r\\n)?(?:CACHE-CONTROL: max-age=0\\r\\n)?CONTENT-TYPE: text/html\\r\\n\\r\\n\\xef\\xbb\\xbf<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1\\.0 Strict//EN\" \"http://www\\.w3\\.org/TR/xhtml1/DTD/xhtml1-strict\\.dtd\">\\r\\n<html> *\\r\\n *<head>\\r\\n *<title>",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "",
+      "devicetype": "webcam",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Dahua webcam httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nCONNECTION: close\\r\\n(?:Date: .*\\r\\nLast-Modified: .*\\r\\nEtag: \"\\d+:[\\da-f]+\"\\r\\n)?CONTENT-LENGTH: \\d+\\r\\n(?:P3P: CP=CAO PSA OUR\\r\\n)?(?:CACHE-CONTROL: max-age=0\\r\\n)?CONTENT-TYPE: text/html\\r\\n\\r\\n\\xef\\xbb\\xbf<!DOCTYPE html(?: PUBLIC \"-//W3C//DTD XHTML 1\\.0 Strict//EN\" \"http://www\\.w3\\.org/TR/xhtml1/DTD/xhtml1-strict\\.dtd\")?>\\r\\n<html> *\\r\\n *<head>\\r\\n *<title>",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "",
+      "devicetype": "webcam",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Dahua webcam httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nDate: .*\\r\\nServer: OpenSA/([\\d.]+) / Apache/([\\d.]+) \\((\\w*)\\) mod_ssl/([\\d.]+) OpenSSL/([\\d.]+)\\r\\n.*<LINK REL=\\\"SHORTCUT ICON\\\" HREF=\\\"http://([\\w.-_]+)/iss\\.ico\\\">\\r\\n<TITLE> System Scanner Vista Welcome Page </TITLE>\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:openssl:openssl:$5",
+      "devicetype": "",
+      "hostname": "$6",
+      "info": "",
+      "operatingsystem": "$3",
+      "vendorproductname": "ISS System Scanner Vista",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1.1 400 Bad Request\\r\\n.*?Server: nginx/([\\d.]+)[^\\r\\n]*?\\r\\n.*<title>400 The plain HTTP request was sent to HTTPS port</title>",
+    "name": "ssl/http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:igor_sysoev:nginx:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "nginx",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d.*\\r\\nServer: nginx/([\\d.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:igor_sysoev:nginx:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "nginx",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d.*\\r\\nServer: nginx/([\\d.]+) \\+ ([^\\r\\n]*)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:igor_sysoev:nginx:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "$2",
+      "operatingsystem": "",
+      "vendorproductname": "nginx",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d .*<center>nginx/([\\d.]+)</center>\\r?\\n</body>\\r?\\n</html>[\\r\\n]+$",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:igor_sysoev:nginx:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "nginx",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^<html>\\r\\n<head><title>400 Bad Request</title></head>\\r\\n<body bgcolor=\\\"white\\\">\\r\\n<center><h1>400 Bad Request</h1></center>\\r\\n<hr><center>nginx/([\\w._-]+)</center>\\r\\n</body>\\r\\n</html>\\r\\n$",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:igor_sysoev:nginx:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "nginx",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: LiteSpeed\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "LiteSpeed httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: LiteSpeed/([\\w. ]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "LiteSpeed httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d .*Powered By <a href='http://www\\.litespeedtech\\.com'>LiteSpeed Web Server</a>",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "LiteSpeed httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: Jetty\\((\\d[-.\\w]+)\\)\\r\\n\\r\\n<html>\\n  <head><title>Wildfire HTTP Binding Service</title></head>",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Wildfire HTTP Bindings",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: Jetty\\((\\d[-.\\w]+)\\)\\r\\n\\r\\n.*Contexts known to this server are: <ul><li><a href=\\\"/ninan/\\\">/ninan",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Ninan usenet downloader http interface",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d .*\\r\\nDate: .*\\r\\nServer: Jetty/(\\d[-.\\w]+) \\(([^)\\r\\n]+)\\)?\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "$2",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: Jetty\\(([\\w._-]+)\\)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: MortBay-Jetty-([-\\w_.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 404 Not Found\\r\\nContent-Type: text/html\\r\\nContent-Length: \\d+\\r\\n\\r\\n<HTML>\\n<HEAD>\\n<TITLE>Error 404 - Not Found</TITLE>\\n<BODY>\\n<H2>Error 404 - Not Found\\.</H2>\\nNo context on this server matched or handled this request\\.",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\n(?:[^\\r\\n]+\\r\\n)*?Server: Jetty\\(EAServer/([\\w._ -]+)\\)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:sybase:easerver:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Sybase EAServer $1",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nExpires: Thu, 01 Jan 1970 00:00:00 GMT\\r\\nSet-Cookie: JSESSIONID=\\w+;Path=/\\r\\nContent-Type: text/html\\r\\nLast-Modified: .*\\r\\nAccept-Ranges: bytes\\r\\nContent-Length: 115\\r\\n\\r\\n<html>\\n<head><title></title>\\n<meta http-equiv=\\\"refresh\\\" content=\\\"0;URL=index\\.jsp\\\">\\n</head>\\n<body>\\n</body>\\n</html>\\n\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Openfire chat server http admin",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nDate: .*\\r\\nExpires: Fri, 01 Jan 1980 00:00:00 GMT\\r\\n.*<title>Gerrit Code Review</title>",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Gerrit code review",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nContent-Type: text/html; charset=iso-8859-1\\r\\nContent-Length: \\d+\\r\\n\\r\\n\\n\\n\\n\\n\\n\\n\\n\\n\\r\\n\\r\\n\\r\\n\\r\\n\\r\\n\\r\\n\\r\\n\\r\\n.*<title>F-Secure Policy Manager Server</title>",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty",
+      "devicetype": "",
+      "hostname": "",
+      "info": "F-Secure Policy Manager Server",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d .*<a href=\\\"http://jetty\\.mortbay\\.org/?\\\">Powered by Jetty://</a>",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d .*<a href=\\\"http://eclipse\\.org/jetty\\\">Powered by Jetty:// ?(\\d[\\w._-]*)</a>",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:eclipse:jetty:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d .*<small>Powered by Jetty://</small>",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:eclipse:jetty",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": "9.2.11 or older"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 404 Not Found\\r\\n.*<small>Powered by Jetty://</small>",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:mortbay:jetty",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Jetty",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 200 OK\\nContent-Type: text/plain\\nContent-Length: 20\\n\\nmining server online",
+    "name": "cryptonote",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Node.js",
+      "operatingsystem": "",
+      "vendorproductname": "node-cryptonote-pool CryptoNote miner",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\ncontent-type: text/html\\r\\ncontent-length: \\d+\\r\\nlast-modified: .*\\r\\netag: [0-9a-f]+\\r\\nConnection: close\\r\\n\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nContent-Type: text/plain\\r\\nConnection: close\\r\\n\\r\\nHello, non-Bayeux request\\. Yet another one$",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Faye Bayeux protocol",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nX-Powered-By: Express\\r\\nContent-Type: text/html; charset=utf-8\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Express middleware",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nSet-Cookie: sid=[^;]+; path=/; httponly\\r\\nSet-Cookie: sid\\.sig=[^;]+; path=/; httponly\\r\\nDate: .*\\r\\nConnection: close\\r\\n\\r\\n<!DOCTYPE HTML>.*<h1>Webhook Deployer v([\\w._-]+)",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Webhook Deployer v$1",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nContent-Type: text/html\\r\\nDate: .*\\r\\nConnection: close\\r\\n\\r\\n<!doctype html>\\n<html>\\n  <head>\\n    <title>rabbit\\.js and Socket\\.IO publish/subscribe example</title>",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "rabbit.js messaging example page",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 404 Not Found\\r\\nX-Powered-By: Sinopia/([\\w._-]+)\\r\\nContent-Type: text/html; charset=utf-8\\r\\nContent-Length: 13\\r\\nVary: Accept-Encoding\\r\\nX-Status-Cat: http://flic\\.kr/p/aV6juR\\r\\nDate: .*\\r\\nConnection: close\\r\\n\\r\\nCannot GET /\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "node.js",
+      "operatingsystem": "",
+      "vendorproductname": "Sinopia npm proxy",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nContent-Type: text/plain\\r\\nDate: .* GMT\\r\\nConnection: close\\r\\n\\r\\nNot implemented$",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 500 Internal Server Error\\r\\nContent-Type: text/plain\\r\\nContent-Length: \\d+\\r\\n.* at [\\w._]+ (?:\\[as [\\w._]+\\] )?\\(([^:)]*/nodejs/)node_modules/[^:)]+\\.js:\\d+:\\d+\\)\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "installation path: $1",
+      "operatingsystem": "",
+      "vendorproductname": "node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nContent-Type: text/html\\r\\nDate: .* GMT\\r\\nConnection: close\\r\\n\\r\\n<!DOCTYPE html><html>    <head>        <meta charset=\"utf-8\" />        <title>Node\\.js</title>    </head>    <body>       <h1>Welcome to Node\\.js</h1>    </body></html>",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nx-powered-by: Express\\r\\naccept-ranges: bytes\\r\\ncache-control: public, max-age=0\\r\\nlast-modified: .*\\r\\netag: W/\"[-\\da-f]+\"\\r\\ncontent-type: text/html; charset=UTF-8\\r\\ncontent-length: \\d+\\r\\ndate: .*\\r\\nconnection: close\\r\\n\\r\\n<!DOCTYPE html>\\n<html>\\n  <head>\\n    <title>hotel</title>",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:typicode:hotel",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Node.js Express framework",
+      "operatingsystem": "",
+      "vendorproductname": "hotel web process manager",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 302 Found\\r\\nX-DNS-Prefetch-Control: off\\r\\nX-Frame-Options: SAMEORIGIN\\r\\n(?:Strict-Transport-Security: max-age=\\d+; includeSubDomains\\r\\n)?X-Download-Options: noopen\\r\\nX-Content-Type-Options: nosniff\\r\\nX-XSS-Protection: 1; mode=block\\r\\nLocation: /signin\\r\\nVary: Accept\\r\\nContent-Type: text/plain; charset=utf-8\\r\\nContent-Length: \\d+\\r\\nset-cookie: connect\\.sid=",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:vates:xen_orchestra",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Node.js Express middleware",
+      "operatingsystem": "",
+      "vendorproductname": "Xen Orchestra",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\nDate: .*\\r\\nConnection: close\\r\\n\\r\\n$",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r.*\\nServer: Node v([\\d.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?X-Powered-By: Express\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js Express framework",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 404 Not Found\\r\\nSet-Cookie: sid=[0-9a-f]{128}; path=/; httponly\\r\\nContent-Type: application/json\\r\\nDate: .*\\r\\nConnection: close\\r\\n\\r\\n{\\\"message\\\":\\\"Resource Not Found\\\",\\\"status\\\":404}",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:nodejs:node.js",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Node.js",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 302 Found\\r\\nServer: Cassini/([\\w._-]+)\\r\\n(?:[^\\r\\n]+\\r\\n)*?X-AspNet-Version: ([\\w._-]+)\\r\\n(?:[^\\r\\n]+\\r\\n)*?Location: /SDALogin\\.aspx\\r\\n.*<title>\\r\\n\\tSDA-MSC-6 - Login to Symon LCD-(\\w+) \\r\\n</title>",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Symon SDA-$3 media player http config; ASP.NET $2",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Cassini httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d .*\\r\\nServer: Microsoft ASP\\.NET Web Matrix Server/([\\d.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft ASP.NET Web Matrix httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 200 OK\\r\\n(?:[^\\r\\n]+\\r\\n)*?Server: Mono\\.WebServer2/([\\w._-]+) Unix\\r\\nX-AspNet-Version: ([\\d.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:mono:xsp:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "MonoDoc httpd; ASP.NET $2",
+      "operatingsystem": "Unix",
+      "vendorproductname": "Mono.WebServer2",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/2\\.0 302 Found\\r\\nServer: SmarterTools/([\\w._-]+)\\r\\n(?:[^\\r\\n]+\\r\\n)*?X-AspNet-Version: ([\\w._-]+)\\r\\n(?:[^\\r\\n]+\\r\\n)*?Location: /Login\\.aspx\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "ASP.NET $2",
+      "operatingsystem": "Windows",
+      "vendorproductname": "SmarterTools httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 302 Found\\r\\n(?:[^\\r\\n]+\\r\\n)*?Server: SouthRiver/([\\w._-]+)\\r\\n(?:[^\\r\\n]+\\r\\n)*?X-AspNet-Version: ([\\w._-]+)\\r\\n(?:[^\\r\\n]+\\r\\n)*?Location: /Content\\.aspx\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:southrivertech:titan_ftp_server:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "ASP.NET $2",
+      "operatingsystem": "",
+      "vendorproductname": "SouthRiver Titan httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 302 Found\\r\\nServer: Cassini/(4\\.[\\d.]+)\\r\\nDate: .*\\r\\nX-AspNet-Version: ([\\d.]+)\\r\\nLocation: /Login\\.aspx\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "SmarterStats 8.2; ASP.NET $2",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Cassini httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 200 OK\\r\\nDate: .* GMT\\r\\nServer: PHttp/([\\d.]+) Win32NT\\r\\nX-AspNetMvc-Version: ([\\d.]+)\\r\\nX-AspNet-Version: ([\\d.]+)\\r\\nContent-Length: \\d+\\r\\nCache-Control: private\\r\\nContent-Type: text/html; charset=utf-8\\r\\nSet-Cookie: WorkplaceToken=[a-f\\d]{8}-[a-f\\d]{4}-[a-f\\d]{4}-[a-f\\d]{4}-[a-f\\d]{12}; path=/; expires=.* GMT\\r\\nConnection: close\\r\\n\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "ASP.NET $3; MVC $2",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Termika OlimpOKS PHttpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 200 OK\\r\\nDate: .* GMT\\r\\nServer: PHttp/([\\d.]+) Unix\\r\\nX-AspNetMvc-Version: ([\\d.]+)\\r\\nX-AspNet-Version: ([\\d.]+)\\r\\nContent-Length: \\d+\\r\\nCache-Control: private\\r\\nContent-Type: text/html; charset=utf-8\\r\\nSet-Cookie: WorkplaceToken=[a-f\\d]{8}-[a-f\\d]{4}-[a-f\\d]{4}-[a-f\\d]{4}-[a-f\\d]{12}; path=/; expires=.* GMT\\r\\nConnection: close\\r\\n\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:termika:olimpoks",
+      "devicetype": "",
+      "hostname": "",
+      "info": "ASP.NET $3; MVC $2",
+      "operatingsystem": "Unix",
+      "vendorproductname": "Termika OlimpOKS PHttpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d .*\\r\\nServer: Cassini/([\\d.]+)\\r\\nDate: .*\\r\\nX-AspNet-Version: ([\\d.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "ASP.NET $2",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft Cassini httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?X-AspNetMvc-Version: ([\\d.]+)\\r\\nX-AspNet-Version: ([\\d.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:microsoft:asp.net:$2",
+      "devicetype": "",
+      "hostname": "",
+      "info": "MVC $1",
+      "operatingsystem": "",
+      "vendorproductname": "ASP.NET",
+      "version": "$2"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 405 Method Not Allowed\\r\\nServer: Cassini/([\\w._-]+)\\r\\n(?:[^\\r\\n]+\\r\\n)*?X-AspNet-Version: ([\\w._-]+)\\r\\n.*<title>Runtime Error</title>\\r\\n        <style>\\r\\n         body {font-family:\\\"Verdana\\\";font-weight:normal;font-size: \\.7em;color:black;}",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Ateas Security webcam management httpd; ASP.NET $2",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Cassini httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d .*\\r\\nServer: thttpd/(\\d[-.+\\w]+) ([\\w?]+) Built-in PHP",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:acme:thttpd:$1_$2",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Built-in PHP",
+      "operatingsystem": "",
+      "vendorproductname": "thttpd",
+      "version": "$1 $2"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?X-Powered-By: PHP/([\\d.]+)\\r\\nServer: thttpd/([\\w.]+) PHP/([\\d.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:php:php:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "PHP $1 ($3)",
+      "operatingsystem": "",
+      "vendorproductname": "thttpd",
+      "version": "$2"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: thttpd/([\\w.]+) PHP/([\\d.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:php:php:$2",
+      "devicetype": "",
+      "hostname": "",
+      "info": "PHP $2",
+      "operatingsystem": "",
+      "vendorproductname": "thttpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d .*\\r\\nDate: .*\\r\\nServer: IBM_HTTP_SERVER/(\\d[-.\\w]+) +Apache/(\\d[-.\\w]+) \\(Unix\\) PHP/([\\d.]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:php:php:$3",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Derived from Apache $2; PHP $3",
+      "operatingsystem": "Unix",
+      "vendorproductname": "IBM HTTP Server",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 200 OK\\r\\ncontent-type: text/html\\r\\nconnection: close\\r\\npragma: no-cache\\r\\nX-Powered-By: PHP/([\\d.]+)\\r\\nContent-type: text/html\\r\\n\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:php:php:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "PHP $1",
+      "operatingsystem": "",
+      "vendorproductname": "Miranda mbot plugin",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] (?!400)\\d\\d\\d.*\\r\\nDate: .*\\r\\nServer: Apache ([^\\r\\n]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:apache:http_server",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Apache httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 200 OK\\r\\n(?:[^\\r\\n]+\\r\\n)*?Server: Apache\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:apache:http_server",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Apache httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01].*\\r\\nServer: Microsoft-IIS/([-.\\w]+)\\r\\n(?:[^\\r\\n]+\\r\\n)*?Content-Location: http://[^/]+/nfuse.htm\\r\\n.*\\r\\n---- NFuse ([-.\\w]+) \\(Build ",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Microsoft IIS $1",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Citrix NFuse",
+      "version": "$2"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01].*\\r\\nServer: Microsoft-IIS/([-.\\w]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01].*\\r\\nServer: Microsoft-IIS/([-.\\w]+) (mod_perl/[-.\\w]+ Perl/[-.\\w]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "$2",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 500 Internal Server Error \\( An internal error occurred\\.  \\)\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 403 Forbidden \\( Der Server hat den angegebenen URL \\(Uniform Resource Locator\\) verweigert\\. Wenden Sie sich an den Serveradministrator\\.  \\)\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "German",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 403 Forbidden \\( Der Server hat die angegebene URL verweigert\\. Wenden Sie sich an den Serveradministrator\\.  \\)\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "German",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 403 Forbidden \\( The server denied the specified Uniform Resource Locator \\(URL\\)\\. Contact the server administrator\\.  \\)\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 403 Forbidden \\( Der Server hat den angegebenen URL verweigert\\. Wenden Sie sich an den Serveradministrator\\.",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "German",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 403 Forbidden \\( Le serveur a refus\\xc3\\xa9 l'URL \\(Uniform Resource Locator\\) sp\\xc3\\xa9cifi\\xc3\\xa9e\\. Contactez l'administrateur du serveur\\.",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "French",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 403 Forbidden \\( El servidor deneg\\xc3\\xb3 la direcci\\xc3\\xb3n URL \\(Uniform Resource Locator\\) especificada\\. P\\xc3\\xb3ngase en contacto con el administrador del servidor\\.",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Spanish",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 400 Bad Request\\r\\nContent-Type: text/html\\r\\nDate: .*\\r\\nConnection: close\\r\\nContent-Length: \\d+\\r\\n\\r\\n<h1>Bad Request \\(Invalid .*\\)</h1>$",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:microsoft:internet_information_services",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 401 Access Denied\\r\\nWWW-Authenticate: NTLM\\r\\nContent-Length: 24\\r\\nContent-Type: text/html\\r\\n\\r\\nError: Access is Denied\\.",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": "3.X"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d .*\\r\\nDate: .*\\r\\nX-Powered-By: ASP\\.NET\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:microsoft:windows",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "Windows",
+      "vendorproductname": "Microsoft IIS httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d .*\\r\\nServer: micro_httpd\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "o:acme:micro_httpd",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "micro_httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 408 Request Timeout\\r\\nServer: micro_httpd\\r\\nDate: .* GMT\\r\\nContent-Type: text/html\\r\\nConnection: close\\r\\n\\r\\n<HTML><HEAD><TITLE></TITLE><meta http-equiv=\\\"Pragma\\\" content=\\\"no-cache\\\"></HEAD>\\n<BODY BGCOLOR=\\\"#FFFFFF\\\">\\nRequest timed out\\.\\n\\n</BODY></HTML>\\n$",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "h:buffalo:wli-tx4-g54hp",
+      "devicetype": "WAP",
+      "hostname": "",
+      "info": "Buffalo WLI-TX4-G54HP WAP http config",
+      "operatingsystem": "",
+      "vendorproductname": "micro_httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 400 Bad Request\\r\\nServer: micro_httpd\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:acme:micro_httpd",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "micro_http",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: openresty/([\\w._-]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:openresty:ngx_openresty:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "OpenResty web app server",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: openresty\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:openresty:ngx_openresty",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "OpenResty web app server",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: ngx_openresty/([\\w._-]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:openresty:ngx_openresty:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "OpenResty web app server",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: ngx_openresty\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:openresty:ngx_openresty",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "OpenResty web app server",
+      "version": "1.9.7.2 or earlier"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 302 Found\\r\\nLocation: .*?/login\\r\\nSet-Cookie: grafana_sess=[a-f\\d]{16}; Path=/; HttpOnly\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:xn--torkel_degaard-1pb:grafana",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Grafana",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.0 301 Moved Permanently\\r\\nLocation: http://([\\w.-]+):\\d+/\\r\\nSet-Cookie: grafana_sess=[^;]*; Path=/; HttpOnly\\r\\nDate: ",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:grafana:grafana",
+      "devicetype": "",
+      "hostname": "$1",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Grafana http",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: WebLogic WebLogic Server (\\d[-.\\w]+(?: SP\\d+)?) +\\w\\w\\w",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:oracle:weblogic_server:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "WebLogic applications server",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Server: WebLogic ([\\d.]+) Service Pack (\\d+) [^\\r\\n]+\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:oracle:weblogic_server:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Service Pack $2",
+      "operatingsystem": "",
+      "vendorproductname": "WebLogic applications server",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d .*\\r\\nDate: .*\\r\\nServer: WebLogic Server ([\\d.]+ SP\\d+) ",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:oracle:weblogic_server:$1",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "WebLogic httpd",
+      "version": "$1"
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.[01] \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Date: .*<META NAME=\\\"GENERATOR\\\" CONTENT=\\\"WebLogic Server\\\">\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:oracle:weblogic_server",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "WebLogic httpd",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 \\d\\d\\d (?:[^\\r\\n]*\\r\\n(?!\\r\\n))*?Connection: close\\r\\nDate: .*\\nX-Powered-By: Servlet/([\\w._-]+) JSP/([\\w._-]+)\\r\\n",
+    "name": "http",
+    "pattern_flag": "s",
+    "versioninfo": {
+      "cpename": "a:oracle:weblogic_server",
+      "devicetype": "",
+      "hostname": "",
+      "info": "Servlet $1; JSP $2",
+      "operatingsystem": "",
+      "vendorproductname": "Oracle WebLogic Server",
+      "version": ""
+    }
+  },
+  {
+    "pattern": "^HTTP/1\\.1 404 Not Found\\r\\nConnection: close\\r\\nDate: .* GMT\\r\\nContent-Length: 1164\\r\\nContent-Type: text/html; charset=UTF-8\\r\\n\\r\\n",
+    "name": "http",
+    "pattern_flag": "",
+    "versioninfo": {
+      "cpename": "a:oracle:weblogic_server",
+      "devicetype": "",
+      "hostname": "",
+      "info": "",
+      "operatingsystem": "",
+      "vendorproductname": "Oracle WebLogic admin httpd",
+      "version": ""
+    }
+  }
+]
