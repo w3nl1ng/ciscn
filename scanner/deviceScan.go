@@ -7,6 +7,7 @@ import (
 	"log"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/panjf2000/ants/v2"
 )
@@ -35,8 +36,8 @@ func scanDevice(i interface{}) {
 	log.Printf("scanner/deviceScan: finish scanning %s\n", ipSubnet)
 }
 
-//此函数扫描存活ip的设备信息
-func (sc *Scanner) deviceScan() {
+// 此函数扫描存活ip的设备信息
+func (sc *Scanner) DeviceScan() {
 	ipListAll := sc.LiveIP
 
 	var wg sync.WaitGroup
@@ -55,11 +56,14 @@ func (sc *Scanner) deviceScan() {
 	}
 	wg.Wait()
 
-	for i, v := range sc.LiveIP{
+	for i, v := range sc.LiveIP {
 		var liveIpInfo LiveIPInfo
-		liveIpInfo.DeviceInfo = TempDeviceInfo[i]
+		if TempDeviceInfo[i] != "" {
+			liveIpInfo.DeviceInfo = TempDeviceInfo[i]
+		}
+		// liveIpInfo.DeviceInfo = TempDeviceInfo[i]
 		liveIpInfo.HoneyPot = sc.ScanResult[v].HoneyPot
-		liveIpInfo.TimeStamp = sc.ScanResult[v].TimeStamp
+		liveIpInfo.TimeStamp = time.Now().Format("2006-01-02 15:04:05")
 		liveIpInfo.Services = sc.ScanResult[v].Services
 		fmt.Println(sc.ScanResult[v].Services)
 		sc.ScanResult[v] = liveIpInfo
@@ -72,11 +76,11 @@ func findDeviceInfo(out string) string {
 	var deviceInfo config.DeviceInfo
 	Flag := "Device type"
 	lines := strings.Split(out, "\n")
-	InFostr := "" 
+	InFostr := ""
 
 	var lineNum int
 	for i, v := range lines {
-		if strings.Contains(v, Flag){
+		if strings.Contains(v, Flag) {
 			lineNum = i
 			break
 		}
@@ -92,32 +96,29 @@ func findDeviceInfo(out string) string {
 		str := strings.Split(info, "|")
 		str[0] = strings.Split(str[0], ": ")[1]
 		//从前往后匹配
-		for _, v := range str{
-			switch v{
+		for _, v := range str {
+			switch v {
 			case "general purpose":
-				// deviceInfo.Name = "general purpose"
-				// deviceInfo.Type = "general purpose"
-				InFostr = deviceInfo.Type + deviceInfo.Name
-				return InFostr
+				return ""
 			case "firewall":
 				deviceInfo.Name = "pfsense"
 				deviceInfo.Type = "firewall"
-				InFostr = deviceInfo.Type + deviceInfo.Name
+				InFostr = deviceInfo.Type + "/" + deviceInfo.Name
 				return InFostr
 			case "Webcam":
 				deviceInfo.Name = "Hikvision"
 				deviceInfo.Type = "Webcam"
-				InFostr = deviceInfo.Type + deviceInfo.Name
+				InFostr = deviceInfo.Type + "/" + deviceInfo.Name
 				return InFostr
 			case "switch":
 				deviceInfo.Name = "cisco"
 				deviceInfo.Type = "switch"
-				InFostr = deviceInfo.Type + deviceInfo.Name
+				InFostr = deviceInfo.Type + "/" + deviceInfo.Name
 				return InFostr
 			case "storage-misc":
 				deviceInfo.Name = "synology"
 				deviceInfo.Type = "Nas"
-				InFostr = deviceInfo.Type + deviceInfo.Name
+				InFostr = deviceInfo.Type + "/" + deviceInfo.Name
 				return InFostr
 			}
 			// if strings.Contains(v ,"general purpose"){

@@ -21,10 +21,13 @@ func main() {
 
 	sc.ScanLiveIP()
 	sc.PortScan()
+	sc.ServiceScan()
+	sc.DeviceScan()
 
 	fmt.Println(sc.ScanResult)
 
 	cost := time.Since(start)
 	fmt.Printf("cost: %v", cost)
 
+	sc.SaveScanResult("./out.json")
 }

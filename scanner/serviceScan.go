@@ -151,7 +151,7 @@ func parseProtocol(protocol string) string {
 	protocol = strings.ToLower(protocol)
 	switch protocol {
 	case "ssl/http":
-		return "httpp"
+		return "http"
 	case "ssl/https":
 		return "https"
 	case "ssh":

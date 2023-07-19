@@ -30,7 +30,7 @@ func Test_deviceScan(t *testing.T) {
 	// sc.ScanLiveIP()
 	sc.LiveIP = []string{"16.163.13.255", "16.163.13.251", "16.163.13.250", "16.163.13.249"}
 	sc.PortScan()
-	sc.deviceScan()
+	sc.DeviceScan()
 
 	fmt.Println(sc.ScanResult)
 }
