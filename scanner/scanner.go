@@ -11,7 +11,7 @@ type Scanner struct {
 type LiveIPInfo struct {
 	Services   []PortInfo  `json:"services"`
 	DeviceInfo interface{} `json:"deviceinfo"`
-	HoneyPot   interface{} `json:"honeypot"`
+	HoneyPot   []string    `json:"honeypot"`
 	TimeStamp  string      `json:"timestamp"`
 }
 

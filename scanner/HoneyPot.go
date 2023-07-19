@@ -14,7 +14,7 @@ func (sc *Scanner) HoneyPotScanPlus() {
 				address := fmt.Sprintf("%s:%d", ip, service.Port)
 				fmt.Printf("开始检测%s是否存在Kippo蜜罐\r\n", address)
 				if probe.IsKippoHoneyPot(address) {
-					info.HoneyPot = append(info.HoneyPot.([]string), fmt.Sprintf("%d/%s", service.Port, "Kippo"))
+					info.HoneyPot = append(info.HoneyPot, fmt.Sprintf("%d/%s", service.Port, "Kippo"))
 					fmt.Println(address + " !! 发现Kippo蜜罐")
 				}
 				break
@@ -24,12 +24,12 @@ func (sc *Scanner) HoneyPotScanPlus() {
 				address := fmt.Sprintf("http://%s:%d", ip, service.Port)
 				fmt.Printf("开始检测%s是否存在Glastopf 或者 HFish 蜜罐\n", address)
 				if probe.IsGlastopfHoneyPot(address) {
-					info.HoneyPot = append(info.HoneyPot.([]string), fmt.Sprintf("%d/%s", service.Port, "glastopf"))
+					info.HoneyPot = append(info.HoneyPot, fmt.Sprintf("%d/%s", service.Port, "glastopf"))
 					fmt.Println(address + " !! 发现Glastopf蜜罐")
 				}
 
 				if probe.IsHFishfHoneyPot(address) {
-					info.HoneyPot = append(info.HoneyPot.([]string), fmt.Sprintf("%d/%s", service.Port, "HFish"))
+					info.HoneyPot = append(info.HoneyPot, fmt.Sprintf("%d/%s", service.Port, "HFish"))
 					fmt.Println(address + " !! 发现HFish蜜罐")
 				}
 				break
@@ -39,12 +39,12 @@ func (sc *Scanner) HoneyPotScanPlus() {
 				address := fmt.Sprintf("https://%s:%d", ip, service.Port)
 				fmt.Printf("开始检测%s是否存在Glastopf 或者 HFish 蜜罐\n", address)
 				if probe.IsGlastopfHoneyPot(address) {
-					info.HoneyPot = append(info.HoneyPot.([]string), fmt.Sprintf("%d/%s", service.Port, "glastopf"))
+					info.HoneyPot = append(info.HoneyPot, fmt.Sprintf("%d/%s", service.Port, "glastopf"))
 					fmt.Println(address + " !! glastopf")
 				}
 
 				if probe.IsHFishfHoneyPot(address) {
-					info.HoneyPot = append(info.HoneyPot.([]string), fmt.Sprintf("%d/%s", service.Port, "HFish"))
+					info.HoneyPot = append(info.HoneyPot, fmt.Sprintf("%d/%s", service.Port, "HFish"))
 					fmt.Println(address + " !! 发现HFish蜜罐")
 				}
 				break
